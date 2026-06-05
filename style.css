@@ -1,0 +1,94 @@
+/* ===== 큐카드 (Cue Card) ===== */
+:root{
+  --cc-accent:#6c8cff; --cc-active:#3b5bdb; --cc-active-bg:#dfe7ff;
+  --cc-persist:#2f9e44; --cc-persist-bg:#e6fcf0; --cc-temp:#e8590c; --cc-temp-bg:#fff0e6;
+}
+
+#cc-root{ font-family:inherit; font-size:12px; margin:0 0 2px; }
+#cc-root *{ box-sizing:border-box; }
+
+/* 카드 버튼 바 — 핸들(토글)을 바 안에 합쳐 한 줄 */
+#cc-bar{
+  display:flex; flex-wrap:wrap; gap:4px; align-items:center; padding:2px 2px;
+}
+#cc-bar.collapsed #cc-cards,
+#cc-bar.collapsed .cc-collapsible{ display:none; }
+
+.cc-toggle{
+  cursor:pointer; padding:2px 5px; opacity:.6; font-size:10px; user-select:none; white-space:nowrap;
+  border-radius:6px; transition:.15s;
+}
+.cc-toggle:hover{ opacity:1; color:var(--cc-active); background:rgba(108,140,255,.1); }
+.cc-toggle .cc-chev{ display:inline-block; transition:.2s; font-size:9px; margin-left:2px; }
+#cc-bar.collapsed .cc-toggle .cc-chev{ transform:rotate(-90deg); }
+.cc-toggle .cc-dot{ margin-left:4px; color:var(--cc-active); font-weight:600; }
+
+.cc-cue{
+  border:1px solid var(--SmartThemeBorderColor, #d9d9e0);
+  background:var(--SmartThemeBlurTintColor, rgba(255,255,255,.04));
+  color:inherit; border-radius:6px; padding:2px 8px; font-size:10px; cursor:pointer;
+  user-select:none; transition:.12s; white-space:nowrap; line-height:1.25;
+}
+.cc-cue:hover{ border-color:var(--cc-accent); background:var(--cc-active-bg); color:var(--cc-active); }
+.cc-cue.active{ border-color:var(--cc-active); background:var(--cc-active-bg); color:var(--cc-active);
+  font-weight:600; box-shadow:0 0 0 2px rgba(59,91,219,.18); }
+.cc-cue.persist.active{ border-color:var(--cc-persist); background:var(--cc-persist-bg); color:var(--cc-persist);
+  box-shadow:0 0 0 2px rgba(47,158,68,.18); }
+.cc-cue.temp{ border-style:dashed; border-color:var(--cc-temp); color:var(--cc-temp); background:var(--cc-temp-bg); }
+.cc-cue.temp.active{ border-color:var(--cc-temp); color:var(--cc-temp); background:var(--cc-temp-bg);
+  font-weight:600; box-shadow:0 0 0 2px rgba(232,89,12,.22); }
+.cc-cue .cc-pin{ font-size:11px; opacity:.7; margin-right:3px; }
+.cc-cue .cc-x{ margin-left:6px; opacity:.6; font-weight:400; }
+
+.cc-add{ border:1px dashed var(--cc-temp); background:var(--cc-temp-bg); color:var(--cc-temp);
+  border-radius:6px; padding:2px 8px; font-size:10px; cursor:pointer; font-weight:600; }
+.cc-iconbtn{ border:1px solid var(--SmartThemeBorderColor, #d9d9e0);
+  background:var(--SmartThemeBlurTintColor, rgba(255,255,255,.04)); color:inherit;
+  border-radius:6px; padding:2px 7px; font-size:10px; cursor:pointer; user-select:none; }
+.cc-iconbtn:hover{ border-color:var(--cc-accent); color:var(--cc-active); }
+.cc-iconbtn.on{ border-color:var(--cc-active); background:var(--cc-active-bg); color:var(--cc-active); }
+.cc-spacer{ flex:1; } .cc-count{ font-size:10px; opacity:.6; }
+
+/* 패널 공통 (주입 보기 / 관리 / 즉석) */
+.cc-panel{
+  overflow:hidden; max-height:0; transition:max-height .2s ease;
+  border-radius:8px; background:var(--SmartThemeBlurTintColor, rgba(127,127,127,.06));
+}
+.cc-panel.open{ max-height:540px; overflow-y:auto; overflow-x:hidden; margin-bottom:4px; }
+.cc-panel .cc-inner{ padding:10px 12px; }
+/* 패널 안 모든 텍스트는 프레임 안에서 자동 줄바꿈 */
+.cc-panel, .cc-panel *{ overflow-wrap:anywhere; word-break:break-word; min-width:0; max-width:100%; }
+.cc-panel label{ display:flex; align-items:flex-start; gap:7px; flex-wrap:wrap; }
+.cc-phead{ display:flex; align-items:center; gap:8px; margin-bottom:8px; }
+.cc-phead h4{ margin:0; font-size:12px; color:var(--cc-active); font-weight:700; }
+.cc-close{ margin-left:auto; border:1px solid var(--SmartThemeBorderColor,#d9d9e0); background:none;
+  color:inherit; border-radius:6px; padding:3px 11px; font-size:12px; cursor:pointer; }
+.cc-close:hover{ border-color:var(--cc-temp); color:var(--cc-temp); }
+
+/* 주입 미리보기 */
+.cc-inj{ font-size:12px; line-height:1.6; white-space:pre-wrap; border:1px solid var(--SmartThemeBorderColor,#d9d9e0);
+  border-radius:8px; padding:9px 11px; background:var(--SmartThemeBlurTintColor, rgba(0,0,0,.12)); }
+.cc-inj .cc-lbl{ color:var(--cc-active); font-weight:700; }
+.cc-empty{ font-size:12px; opacity:.55; padding:4px 2px; }
+
+/* 관리 패널 */
+.cc-mrow{ display:flex; flex-wrap:wrap; gap:8px; align-items:flex-start; max-width:100%;
+  border:1px solid var(--SmartThemeBorderColor,#d9d9e0);
+  border-radius:8px; padding:8px 10px; margin-bottom:8px; background:var(--SmartThemeBlurTintColor, rgba(127,127,127,.05)); }
+.cc-mrow .cc-ml{ flex:1 1 110px; min-width:0; } .cc-mrow .cc-mp{ flex:2 1 160px; min-width:0; }
+.cc-mlabel{ font-size:10px; opacity:.55; display:block; margin-bottom:2px; }
+.cc-mrow input, .cc-mrow textarea, .cc-addform input, .cc-addform textarea{
+  width:100%; max-width:100%; box-sizing:border-box; border:1px solid var(--SmartThemeBorderColor,#d9d9e0); border-radius:6px;
+  padding:5px 7px; font-size:12.5px; font-family:inherit; background:var(--SmartThemeBlurTintColor, rgba(0,0,0,.1)); color:inherit; }
+.cc-mrow textarea, .cc-addform textarea{ min-height:38px; resize:vertical; }
+.cc-mode{ font-size:11px; border:1px solid var(--SmartThemeBorderColor,#d9d9e0); border-radius:6px;
+  padding:5px 9px; cursor:pointer; white-space:nowrap; user-select:none; }
+.cc-mode.persist{ border-color:var(--cc-persist); color:var(--cc-persist); background:var(--cc-persist-bg); }
+.cc-mode.once{ border-color:var(--cc-active); color:var(--cc-active); background:var(--cc-active-bg); }
+.cc-del{ border:none; background:none; color:#c92a2a; cursor:pointer; font-size:14px; padding:4px; }
+.cc-btn{ border:1px solid var(--SmartThemeBorderColor,#d9d9e0); background:none; color:inherit;
+  border-radius:6px; padding:6px 14px; font-size:12.5px; cursor:pointer; }
+.cc-btn.primary{ background:var(--cc-temp); border-color:var(--cc-temp); color:#fff; font-weight:600; }
+.cc-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
+.cc-f1{ flex:1 1 130px; min-width:0; } .cc-f2{ flex:2 1 160px; min-width:0; }
+.cc-advnote{ font-size:10.5px; opacity:.55; margin:2px 0 8px; line-height:1.5; }

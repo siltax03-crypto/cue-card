@@ -1,0 +1,12 @@
+{
+    "display_name": "큐카드 (Cue Card)",
+    "loading_order": 12,
+    "requires": [],
+    "optional": [],
+    "js": "index.js",
+    "css": "style.css",
+    "author": "Custom",
+    "version": "1.0.0",
+    "homePage": "",
+    "auto_update": false
+}
