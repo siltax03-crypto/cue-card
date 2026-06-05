@@ -29,11 +29,7 @@ const DONE_INSTR =
   "When a goal above is fully realized in the story, append <cue_done>exact goal label</cue_done> at the very end of your reply (hidden meta — never mention it in prose).";
 
 const DEFAULT_CARDS = [
-    { label: '며칠 뒤',  persist: false, prompt: '' },
-    { label: 'Sex',      persist: true,  prompt: '' },
-    { label: '교통사고',  persist: true,  prompt: '' },
-    { label: '고백',      persist: true,  prompt: '' },
-    { label: '술자리',    persist: false, prompt: '' },
+    { label: '며칠 뒤', persist: false, prompt: '며칠 뒤의 새로운 에피소드로 바꿔줘' },
 ];
 
 let temps = [];          // 즉석 카드 (세션 한정, 저장 안 함)
