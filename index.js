@@ -30,8 +30,8 @@ const DONE_INSTR =
 
 const DEFAULT_CARDS = [
     { label: '며칠 뒤', persist: false, prompt: '며칠 뒤의 새로운 에피소드로 바꿔줘' },
-    { label: '바람피는 거', persist: false, prompt: '' },
-    { label: '고백', persist: false, prompt: '' },
+    { label: '바람피는 거', persist: true, prompt: '' },
+    { label: '고백', persist: true, prompt: '' },
 ];
 
 let temps = [];          // 즉석 카드 (세션 한정, 저장 안 함)
