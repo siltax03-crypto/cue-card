@@ -3,10 +3,10 @@
     "loading_order": 12,
     "requires": [],
     "optional": [],
-    "js": "index.js",
-    "css": "style.css",
+    "js": "index.js?v=13",
+    "css": "style.css?v=13",
     "author": "Custom",
-    "version": "1.0.0",
+    "version": "1.4.1",
     "homePage": "",
     "auto_update": false
 }
